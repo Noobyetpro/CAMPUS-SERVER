@@ -1,128 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusServer</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: url('https://i.imgur.com/3R6rZrF.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #fff;
-            text-align: center;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CampusServer</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        background: url('https://i.imgur.com/3R6rZrF.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: #fff;
+        text-align: center;
+    }
 
-        .overlay {
-            background-color: rgba(0, 0, 0, 0.7);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20px;
-        }
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 20px;
+    }
 
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 8px #000;
-        }
+    h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 8px #000;
+    }
 
-        p {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
+    p {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
 
-        .info-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 40px;
-        }
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 40px;
+    }
 
-        .copy-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            justify-content: center;
-        }
+    .copy-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
 
-        .copy-btn {
-            padding: 5px 10px;
-            font-size: 1rem;
-            background-color: #4CAF50;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            color: white;
-            transition: 0.3s;
-        }
+    .copy-btn {
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: #4CAF50;
+        font-size: 1.5rem;
+        transition: 0.3s;
+    }
 
-        .copy-btn:hover {
-            background-color: #45a049;
-        }
+    .copy-btn:hover {
+        color: #45a049;
+    }
 
-        .join-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            background-color: #2196F3;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            color: white;
-            transition: 0.3s;
-        }
+    .join-btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        background-color: #2196F3;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        color: white;
+        transition: 0.3s;
+    }
 
-        .join-btn:hover {
-            background-color: #1976D2;
-        }
+    .join-btn:hover {
+        background-color: #1976D2;
+    }
 
-        footer {
-            position: absolute;
-            bottom: 10px;
-            font-size: 0.9rem;
-            color: #ccc;
-        }
-    </style>
+    footer {
+        position: absolute;
+        bottom: 10px;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+</style>
 </head>
 <body>
-    <div class="overlay">
-        <h1>Welcome to CampusServer!</h1>
+<div class="overlay">
+    <h1>Welcome to CampusServer!</h1>
 
-        <div class="info-container">
-            <div class="copy-row">
-                <p><strong>IP:</strong> <span id="ip">play.campusserver.fun</span></p>
-                <button class="copy-btn" onclick="copyText('ip')">Copy IP</button>
-            </div>
-            <div class="copy-row">
-                <p><strong>Port:</strong> <span id="port">25624</span></p>
-                <button class="copy-btn" onclick="copyText('port')">Copy Port</button>
-            </div>
+    <div class="info-container">
+        <div class="copy-row">
+            <p><strong>IP:</strong> <span id="ip">play.campusserver.fun</span></p>
+            <button class="copy-btn" id="copy-ip" onclick="copyText('ip', 'copy-ip')">📋</button>
         </div>
-
-        <button class="join-btn" onclick="copyServer()">Copy IP & Port</button>
-
-        <footer>© 2025 CampusServer. All rights reserved.</footer>
+        <div class="copy-row">
+            <p><strong>Port:</strong> <span id="port">25624</span></p>
+            <button class="copy-btn" id="copy-port" onclick="copyText('port', 'copy-port')">📋</button>
+        </div>
     </div>
 
-    <script>
-        function copyText(id) {
-            const text = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert(`${id.toUpperCase()} copied to clipboard!`);
-            });
-        }
+    <button class="join-btn" onclick="copyServer()">Copy IP & Port</button>
 
-        function copyServer() {
-            const ip = document.getElementById('ip').textContent;
-            const port = document.getElementById('port').textContent;
-            const full = `${ip}:${port}`;
-            navigator.clipboard.writeText(full).then(() => {
-                alert(`Server address ${full} copied to clipboard!`);
-            });
-        }
-    </script>
+    <footer>© 2025 CampusServer. All rights reserved.</footer>
+</div>
+
+<script>
+    function copyText(id, btnId) {
+        const text = document.getElementById(id).textContent;
+        const btn = document.getElementById(btnId);
+
+        navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = "✅"; // change icon to checkmark
+            setTimeout(() => {
+                btn.textContent = "📋"; // revert back to copy icon
+            }, 2000); // 2 seconds
+        });
+    }
+
+    function copyServer() {
+        const ip = document.getElementById('ip').textContent;
+        const port = document.getElementById('port').textContent;
+        const full = `${ip}:${port}`;
+        navigator.clipboard.writeText(full).then(() => {
+            alert(`Server address ${full} copied to clipboard!`);
+        });
+    }
+</script>
 </body>
 </html>
