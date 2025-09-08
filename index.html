@@ -21,6 +21,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 0 20px;
         }
 
         h1 {
@@ -31,23 +32,51 @@
 
         p {
             font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-bottom: 40px;
+        }
+
+        .copy-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .copy-btn {
+            padding: 5px 10px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #45a049;
         }
 
         .join-btn {
             padding: 15px 30px;
             font-size: 1.2rem;
-            background-color: #4CAF50;
+            background-color: #2196F3;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            text-decoration: none;
             color: white;
             transition: 0.3s;
         }
 
         .join-btn:hover {
-            background-color: #45a049;
+            background-color: #1976D2;
         }
 
         footer {
@@ -61,11 +90,39 @@
 <body>
     <div class="overlay">
         <h1>Welcome to CampusServer!</h1>
-        <p>Join our Minecraft server at:</p>
-        <p><strong>IP:</strong> play.campusserver.fun<br><strong>Port:</strong> 25624</p>
-        <a class="join-btn" href="minecraft://play.campusserver.fun:25624">Join Now</a>
+
+        <div class="info-container">
+            <div class="copy-row">
+                <p><strong>IP:</strong> <span id="ip">play.campusserver.fun</span></p>
+                <button class="copy-btn" onclick="copyText('ip')">Copy IP</button>
+            </div>
+            <div class="copy-row">
+                <p><strong>Port:</strong> <span id="port">25624</span></p>
+                <button class="copy-btn" onclick="copyText('port')">Copy Port</button>
+            </div>
+        </div>
+
+        <button class="join-btn" onclick="copyServer()">Copy IP & Port</button>
+
         <footer>© 2025 CampusServer. All rights reserved.</footer>
     </div>
+
+    <script>
+        function copyText(id) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`${id.toUpperCase()} copied to clipboard!`);
+            });
+        }
+
+        function copyServer() {
+            const ip = document.getElementById('ip').textContent;
+            const port = document.getElementById('port').textContent;
+            const full = `${ip}:${port}`;
+            navigator.clipboard.writeText(full).then(() => {
+                alert(`Server address ${full} copied to clipboard!`);
+            });
+        }
+    </script>
 </body>
 </html>
-
