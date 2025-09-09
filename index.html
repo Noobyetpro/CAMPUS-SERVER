@@ -1,132 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aetherion Smp</title>
-<style>
-    body {
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        background: url('https://i.ibb.co/xKnBmQXv/some-minecraft-wallpapers-i-made-for-fun-v0-yifz9gn1j6de1.png') no-repeat center center fixed;
-        background-size: cover;
-        color: #fff;
-        text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aetherion SMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: url('https://i.ibb.co/xKnBmQXv/some-minecraft-wallpapers-i-made-for-fun-v0-yifz9gn1j6de1.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #00ffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+        }
 
-    .overlay {
-        background-color: rgba(0, 0, 0, 0.7);
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0 20px;
-    }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+        }
 
-    h1 {
-        font-size: 4rem;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 8px #000;
-    }
+        p {
+            font-size: 1.2em;
+            margin: 0.3em 0;
+        }
 
-    p {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
+        .info {
+            margin: 1em 0;
+            text-align: center;
+            background: rgba(0,0,0,0.6);
+            padding: 20px 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+        }
 
-    .info-container {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 40px;
-    }
+        .copy-btn {
+            padding: 10px 25px;
+            margin: 5px;
+            font-size: 1em;
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+            color: #00ffff;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
 
-    .copy-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        justify-content: center;
-        font-size: 1.2rem;
-    }
+        .copy-btn:hover {
+            background-color: #00ffff;
+            color: #000;
+            box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+        }
 
-    .copy-btn {
-        cursor: pointer;
-        border: none;
-        background: none;
-        color: #4CAF50;
-        font-size: 1.5rem;
-        transition: 0.3s;
-    }
-
-    .copy-btn:hover {
-        color: #45a049;
-    }
-
-    .join-btn {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        background-color: #2196F3;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        color: white;
-        transition: 0.3s;
-    }
-
-    .join-btn:hover {
-        background-color: #1976D2;
-    }
-
-    footer {
-        position: absolute;
-        bottom: 10px;
-        font-size: 0.9rem;
-        color: #ccc;
-    }
-</style>
+        .footer {
+            margin-top: 2em;
+            font-size: 0.9em;
+            color: #00ffff;
+            text-shadow: none;
+        }
+    </style>
 </head>
 <body>
-<div class="overlay">
-    <h1>Welcome to Aetherion Smp!</h1>
+    <h1>Aetherion SMP</h1>
+    <p>Bedrock & Java Crossplay</p>
+    <p>Java Version: 1.21.8</p>
+    <p>Required Mod: Simple VC</p>
 
-    <div class="info-container">
-        <div class="copy-row">
-            <p><strong>IP:</strong> <span id="ip">play.aetherionsmp.fun</span></p>
-            <button class="copy-btn" id="copy-ip" onclick="copyText('ip', 'copy-ip')">📋</button>
-        </div>
-        <div class="copy-row">
-            <p><strong>Port:</strong> <span id="port">25624</span></p>
-            <button class="copy-btn" id="copy-port" onclick="copyText('port', 'copy-port')">📋</button>
-        </div>
+    <div class="info">
+        <p>IP: <span id="ip">play.aetherionsmp.fun</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('ip')">Copy IP</button>
+        <p>Port: <span id="port">25624</span></p>
+        <button class="copy-btn" onclick="copyToClipboard('port')">Copy Port</button>
     </div>
 
-    <button class="join-btn" onclick="copyServer()">Copy IP & Port</button>
+    <script>
+        function copyToClipboard(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`${id.toUpperCase()} copied to clipboard!`);
+            }).catch(err => {
+                alert('Failed to copy!');
+            });
+        }
+    </script>
 
-    <footer>© 2025 Caleb Z. All rights reserved.</footer>
-</div>
-
-<script>
-    function copyText(id, btnId) {
-        const text = document.getElementById(id).textContent;
-        const btn = document.getElementById(btnId);
-
-        navigator.clipboard.writeText(text).then(() => {
-            btn.textContent = "✅"; // change icon to checkmark
-            setTimeout(() => {
-                btn.textContent = "📋"; // revert back to copy icon
-            }, 2000); // 2 seconds
-        });
-    }
-
-    function copyServer() {
-        const ip = document.getElementById('ip').textContent;
-        const port = document.getElementById('port').textContent;
-        const full = `${ip}:${port}`;
-        navigator.clipboard.writeText(full).then(() => {
-            alert(`Server address ${full} copied to clipboard!`);
-        });
-    }
-</script>
+    <div class="footer">
+        &copy; 2025 Aetherion SMP
+    </div>
 </body>
 </html>
